@@ -208,6 +208,7 @@
     <Content Include="Views\StockItems\DetailsStorageItemByID.cshtml" />
     <Content Include="Views\StockItems\Edit.cshtml" />
     <Content Include="Views\StockItems\Index.cshtml" />
+    <Content Include="Views\StockItems\NameSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705231901578_Initial.resx">

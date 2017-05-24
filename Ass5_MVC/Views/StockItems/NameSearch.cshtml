@@ -1,43 +1,34 @@
 ﻿@model IEnumerable<Ass5_MVC.Models.StockItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "NameSearch";
 }
 
-<h2>Index</h2>
-<form class="glyphicon glyphicon-search" id="frmsearch" action="~/StockItems/NameSearch" method="get">
-    <input type="text" name="query"/>
-    <input class="btn btn-primary" id="submit" name="query" type="submit" style="font-weight:bold;" value="Search" />
-</form>
-
-@*<div class="glyphicon glyphicon-search">
-    @Html.TextBox("query")
-    <input class="btn btn-primary" type="submit" value="Search"  />
-</div>*@ 
+<h2>NameSearch</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
-</p>    
+</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ArticleNumber)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>*@
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.Price)
-        </th>*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ShelfPosition)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.Description)
-        </th>*@
+        </th>
         <th></th>
     </tr>
 
@@ -46,25 +37,25 @@
         <td>
             @Html.DisplayFor(modelItem => item.ArticleNumber)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>*@
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.Price)
-        </td>*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ShelfPosition)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.Description)
-        </td>*@
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ArticleNumber }) |
-            @Html.ActionLink("Details", "DetailsStorageItemByID", new { id=item.ArticleNumber }) |
-            @Html.ActionLink("Delete", "DeleteStorageItemByID", new { id=item.ArticleNumber })
+            @Html.ActionLink("Details", "Details", new { id=item.ArticleNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ArticleNumber })
         </td>
     </tr>
 }

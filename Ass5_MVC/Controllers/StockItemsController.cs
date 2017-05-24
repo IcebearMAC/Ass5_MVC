@@ -16,7 +16,7 @@ namespace Ass5_MVC.Controllers
     public class StockItemsController : Controller
     {
         Repositories.Repository db = new Repositories.Repository();
-        private readonly object stockItem;
+        //private readonly object stockItem;
 
         public object ArticleNumber { get; private set; }
         public string Include { get; private set; }
@@ -104,22 +104,12 @@ namespace Ass5_MVC.Controllers
             return View(stockItem);
         }
 
-        public ActionResult Index(string searchString)
+        public ActionResult NameSearch(string query)
         {
+            var SearchItem = db.nameSearch(query);
 
-            db.IndexSearch(searchString);
-
-            //var movies = from m in db.Movies
-            //             select m;
-
-            
-
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    movies = movies.Where(s => s.Title.Contains(searchString));
-            //}
-
-            return View(movies);
+                return View(SearchItem);
+ 
         }
 
     }

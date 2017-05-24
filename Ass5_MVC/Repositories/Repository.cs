@@ -64,16 +64,24 @@ namespace Ass5_MVC.Repositories
             throw new NotImplementedException();
         }
 
-        public void IndexSearch(string searchString)
+        public List<StockItem> nameSearch(string query)
         {
             //var db = from m in db.Sto
             //             select m;
 
-            var db = db.Where(i => i.articleNumber.Contains(searchString));
+            //return db.Item.Where(i => i.Name.Contains(query)).ToList();
+            return db.Item.Where(i => i.ArticleNumber == int.Parse(query)||
+                                      i.Price == double.Parse(query)||
+                                      i.Name.Contains(query)
+            ).ToList();
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-               var db = db.Where(s => s.aricleNumber.Contains(searchString));
-            }
+
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    var dibs = db.Item.Where(s => s.Name.Contains(searchString));
+            //}
+
         }
+    }
 }

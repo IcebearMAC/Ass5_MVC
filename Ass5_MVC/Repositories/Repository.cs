@@ -67,6 +67,7 @@ namespace Ass5_MVC.Repositories
         public List<StockItem> nameSearch(string query)
         {
 
+
             //var db = from m in db.Sto
             //             select m;
 

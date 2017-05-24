@@ -2,6 +2,8 @@
 using Ass5_MVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -24,7 +26,7 @@ namespace Ass5_MVC.Repositories
             return db.Item;
         }
 
-        public StockItem GetItemByArticleNumber(int articleNumber)
+        public StockItem GetItemByArticleNumber(int? articleNumber)
         {
             return db.Item.SingleOrDefault(item => item.ArticleNumber == articleNumber);
         }
@@ -40,19 +42,38 @@ namespace Ass5_MVC.Repositories
             db.SaveChanges();
         }
 
-        public void DeleteStorageItemByID(int id)
+        public void DeleteStorageItemByID(int? id)
         {
             StockItem stockItem = db.Item.Find(id);
             db.Item.Remove(stockItem);
             db.SaveChanges();
         }
- 
 
-        // GET: StockItems/Details/5
-        public void DetailsStorageItemByID(int? id)
+        public void DetailsStorageItemByID(int? articleNumber)
         {
-            StockItem stockItem = db.Item.Find(id);
+            StockItem stockItem = db.Item.Find(articleNumber);
         }
 
-    }
+        public DbEntityEntry<StockItem> Entry(StockItem stockItem)
+        {
+            return (DbEntityEntry<StockItem>)db.Entry(stockItem);
+        }
+
+        internal void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void IndexSearch(string searchString)
+        {
+            //var db = from m in db.Sto
+            //             select m;
+
+            var db = db.Where(i => i.articleNumber.Contains(searchString));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+               var db = db.Where(s => s.aricleNumber.Contains(searchString));
+            }
+        }
 }

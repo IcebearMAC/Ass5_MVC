@@ -10,10 +10,14 @@ namespace Ass5_MVC.DataAccess
     public class StoreContext : DbContext
     {
         public DbSet<StockItem> Item { get; set; }
-
+            
         public StoreContext() : base("DefaultConnection")
         {
         }
 
+        internal object Entry(object stockItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

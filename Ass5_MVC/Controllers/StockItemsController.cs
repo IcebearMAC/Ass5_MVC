@@ -10,6 +10,7 @@ using Ass5_MVC.DataAccess;
 using Ass5_MVC.Models;
 using Ass5_MVC.Repositories;
 
+
 namespace Ass5_MVC.Controllers
 {
     public class StockItemsController : Controller
@@ -17,12 +18,8 @@ namespace Ass5_MVC.Controllers
         Repositories.Repository db = new Repositories.Repository();
         private readonly object stockItem;
 
-        //private object id;
-
-        //private object stockItem;
-
         public object ArticleNumber { get; private set; }
-        //internal Repositories.Repository Db { get => db; set => db = value; }
+        public string Include { get; private set; }
 
         // GET: StockItem
         public ActionResult Index()
@@ -31,16 +28,10 @@ namespace Ass5_MVC.Controllers
         }
 
         // GET: ItemByArticleNumber
-        public ActionResult Details(int ArticleNumber)
+        public ActionResult Details(int articleNumber)
         {
-            return View(db.GetItemByArticleNumber());
+            return View(db.GetItemByArticleNumber(articleNumber));
         }
-
-        //    // GET: StockItems/Create
-        //    public ActionResult Create()
-        //    {
-        //        return View();
-        //    }
 
         [HttpGet]
         public ActionResult Create()
@@ -58,7 +49,7 @@ namespace Ass5_MVC.Controllers
         [HttpGet]
         public ActionResult DeleteStorageItemByID(int? id)
         { 
-            return View();
+            return View(db.GetItemByArticleNumber(id));
         }
 
         // POST: StockItems/Delete/5
@@ -75,14 +66,65 @@ namespace Ass5_MVC.Controllers
         // GET: StockItems/Details/5
         public ActionResult DetailsStorageItemByID(int? id)
         {
-            db.DetailsStorageItemByID(id);
+            //db.DetailsStorageItemByID(id);
+            return View(db.GetItemByArticleNumber(id));
+
+        }
+
+        // GET: StockItems/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //StockItem stockItem = db.Item.Find(id);
+            //if (stockItem == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(db.GetItemByArticleNumber(id));
+        }
+
+        // POST: StockItems/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ArticleNumber,Name,Price,ShelfPosition,Quantity,Description")] StockItem stockItem)
+        {
+            if (ModelState.IsValid)
+            {
+
+                db.Entry(stockItem);
+                db.Entry(stockItem).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return View(stockItem);
-            //return View();
+        }
+
+        public ActionResult Index(string searchString)
+        {
+
+            db.IndexSearch(searchString);
+
+            //var movies = from m in db.Movies
+            //             select m;
+
+            
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    movies = movies.Where(s => s.Title.Contains(searchString));
+            //}
+
+            return View(movies);
         }
 
     }
 
-  
+
 
     //    // GET: StockItems
     //    public ActionResult Index()

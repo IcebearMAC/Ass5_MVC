@@ -11,7 +11,22 @@
 </p>
 <table class="table">
     <tr>
+        @*<th>
+            @Html.ActionLink("Articel number", "NameSearch", new { sortOrder = ViewBag.ArtSortParm })
+        </th>
         <th>
+             @Html.ActionLink("Name", "NameSearch", new { sortOrder = ViewBag.NameSortParm  })
+        </th>
+        <th>
+            @Html.ActionLink("Price", "NameSearch", new { sortOrder =  ViewBag.PriceSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Shelf Postition", "NameSearch", new { sortOrder = ViewBag.ShelfSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Quantity", "NameSearch", new { sortOrder = ViewBag.QuantitySortParm })
+        </th>*@
+    <th>
             @Html.DisplayNameFor(model => model.ArticleNumber)
         </th>
         <th>
@@ -54,8 +69,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ArticleNumber }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ArticleNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ArticleNumber })
+            @Html.ActionLink("Details", "DetailsStorageItemByID", new { id=item.ArticleNumber }) |
+            @Html.ActionLink("Delete", "DeleteStorageItemByID", new { id=item.ArticleNumber })
         </td>
     </tr>
 }

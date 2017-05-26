@@ -86,8 +86,11 @@ namespace Ass5_MVC.Repositories
                 var dibs = db.Item.Where(s => s.Name.Contains(query));
             }
 
+           bool test= query.All(char.IsDigit);
+
+
             //if to check if the string contatins a digit
-            if (query.Any(char.IsDigit))
+            if /*(test == true)*/(query.Any(char.IsDigit))
             {
                 //try to parse the string to int
                 if (int.TryParse(query, out iResult))
@@ -108,9 +111,36 @@ namespace Ass5_MVC.Repositories
                 // ordinary search with name and return to list
                 return db.Item.Where(n => n.Name.Contains(query)).ToList();
             }
+        }
 
+        public IEnumerable<StockItem> SortItem(string sortOrder)
+        {
+            var sortItem = from i in db.Item
+                           select i;
 
+            switch (sortOrder)
+            {
+                case "AticleNumber":
+                    sortItem = sortItem.OrderBy(i => i.ArticleNumber);
+                    break;
+                case "Name":
+                    sortItem = sortItem.OrderBy(i => i.Name);
+                    break;
+                case "Price":
+                    sortItem = sortItem.OrderBy(i => i.Price);
+                    break;
+                case "ShelfPosition":
+                    sortItem = sortItem.OrderBy(i => i.ShelfPosition);
+                    break;
+                case "Quantity":
+                    sortItem = sortItem.OrderBy(i => i.Quantity);
+                    break;
+                default:
+                    sortItem = sortItem.OrderBy(i  => i.Name);
+                    break;
+            }
 
+            return sortItem.ToList();
         }
     }
-}
+}   

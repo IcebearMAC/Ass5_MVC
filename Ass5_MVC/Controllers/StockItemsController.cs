@@ -20,15 +20,28 @@ namespace Ass5_MVC.Controllers
         public object ArticleNumber { get; private set; }
         public string Include { get; private set; }
 
+        public ActionResult Index(string sortOrder)
+        {
+            ViewBag.ArtSortParm = sortOrder == "ArticelNumber" ? "Artnr_asc" : "ArticelNumber";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_asc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_asc" : "Price";
+            ViewBag.ShelfSortParm = sortOrder == "ShelfPosition" ? "shelfposiion_asc" : "ShelfPosition";
+            ViewBag.QuantitySortParm = sortOrder == "Quantity" ? "quantity_asc" : "Quantity";
+
+
+            var result = db.SortItem(sortOrder);
+            return View(result);
+        }
+
         /// <summary>
         /// Gets all items in the database 
         /// </summary>
         /// <returns></returns>
         // GET: StockItem
-        public ActionResult Index()
-        {
-            return View(db.GetAllItems());
-        }
+        //public ActionResult Index()
+        //{
+        //    return View(db.GetAllItems());
+        //}
 
         /// <summary>
         /// Gets every item in the database that have the articlenumber that is searched for.
@@ -147,6 +160,5 @@ namespace Ass5_MVC.Controllers
             var SearchItem = db.NameSearcha(query);
             return View(SearchItem);
         }
-
     }
 }

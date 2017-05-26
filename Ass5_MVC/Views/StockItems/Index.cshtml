@@ -18,19 +18,23 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ArticleNumber)
+            @*@Html.DisplayNameFor(model => model.ArticleNumber)*@
+            @Html.ActionLink("Articel number", "Index", new { sortOrder = ViewBag.ArtSortParm })
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Name)
+             @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm  })
         </th>*@
-        @*<th>
+         @*<th>
             @Html.DisplayNameFor(model => model.Price)
+            @Html.ActionLink("Price", "Index", new { sortOrder =  ViewBag.PriceSortParm })
         </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.ShelfPosition)
+            @*@Html.DisplayNameFor(model => model.ShelfPosition)*@
+            @Html.ActionLink("Shelf Postition", "Index", new { sortOrder = ViewBag.ShelfSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            @*@Html.DisplayNameFor(model => model.Quantity)*@
+            @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm })
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Description)

@@ -5,15 +5,12 @@
 }
 
 <h2>Index</h2>
+<p>Search with Articlnumber, Price witha comma or just a product name.</p>
 <form class="glyphicon glyphicon-search" id="frmsearch" action="~/StockItems/NameSearch" method="get">
-    <input type="text" name="query" placeholder="Use Articlenumber, Price with comma or Name"/>
+    <input type="text" name="query" placeholder="Write here for search"/>
     <input class="btn btn-primary" id="submit" name="query" type="submit" style="font-weight:bold;" value="Search" />
 </form>
 
-@*<div class="glyphicon glyphicon-search">
-    @Html.TextBox("query")
-    <input class="btn btn-primary" type="submit" value="Search"  />
-</div>*@ 
 
 <p>
     @Html.ActionLink("Create New", "Create")

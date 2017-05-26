@@ -14,10 +14,5 @@ namespace Ass5_MVC.DataAccess
         public StoreContext() : base("DefaultConnection")
         {
         }
-
-        //internal object Entry(object stockItem)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

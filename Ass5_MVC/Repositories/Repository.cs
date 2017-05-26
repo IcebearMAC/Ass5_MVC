@@ -66,6 +66,11 @@ namespace Ass5_MVC.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Function for search of item
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public IEnumerable<StockItem> /*List<StockItem>*/ NameSearcha(string query)
         {
             //return db.Item.Where(i => i.Name.Contains(query)).ToList();
@@ -75,26 +80,32 @@ namespace Ass5_MVC.Repositories
             //                          i.Name.Contains(query)
             //).ToList();
 
+            // Loop that check if the string hold a value and is not Null
             if (!String.IsNullOrEmpty(query))
             {
                 var dibs = db.Item.Where(s => s.Name.Contains(query));
             }
 
+            //if to check if the string contatins a digit
             if (query.Any(char.IsDigit))
             {
+                //try to parse the string to int
                 if (int.TryParse(query, out iResult))
                 {
+                    //search for articlenumber in database with it and then sed back in string list
                     return db.Item.Where(a => a.ArticleNumber == iResult).ToList();
                 }
-                else /*(double.TryParse(query, out double dResult))*/
+                else // If not Try parse didn´t work it is double
                 {
+                    // Converting string to double
                     double dResult = Convert.ToDouble(query);
-                    // IEnumerable<double> dResult = .Select(r => (double)r.query.value);
+                    // ask database for item with price choosen and then send back in string list
                     return db.Item.Where(p => p.Price == dResult).ToList();
                 }
             }
-            else
+            else // if not any digit
             {
+                // ordinary search with name and return to list
                 return db.Item.Where(n => n.Name.Contains(query)).ToList();
             }
 

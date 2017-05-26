@@ -16,7 +16,6 @@ namespace Ass5_MVC.Controllers
     public class StockItemsController : Controller
     {
         Repositories.Repository db = new Repositories.Repository();
-        //private readonly object stockItem;
 
         public object ArticleNumber { get; private set; }
         public string Include { get; private set; }
@@ -79,6 +78,11 @@ namespace Ass5_MVC.Controllers
             return View(db.GetItemByArticleNumber(id));
         }
 
+        /// <summary>
+        /// Deletes choosen item by id in database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: StockItems/Delete/5
         [HttpPost, ActionName("DeleteStorageItemByID")]
         // [ValidateAntiForgeryToken]
@@ -88,28 +92,34 @@ namespace Ass5_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-
+        /// <summary>
+        /// Shows choosen item in database with articlenumber in detial
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: StockItems/Details/5
         public ActionResult DetailsStorageItemByID(int? id)
         {
             return View(db.GetItemByArticleNumber(id));
         }
 
+        /// <summary>
+        /// calls for item in database to edit view 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: StockItems/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            StockItem stockItem = db.Item.Find(id);
-            if (stockItem == null)
-            {
-                return HttpNotFound();
-            }
             return View(db.GetItemByArticleNumber(id));
         }
 
+
+        /// <summary>
+        /// Stores editet item in the database
+        /// </summary>
+        /// <param name="stockItem"></param>
+        /// <returns></returns>
         // POST: StockItems/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -119,7 +129,6 @@ namespace Ass5_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 db.Entry(stockItem);
                 db.Entry(stockItem).State = EntityState.Modified;
                 db.SaveChanges();
@@ -128,14 +137,15 @@ namespace Ass5_MVC.Controllers
             return View(stockItem);
         }
 
+        /// <summary>
+        /// Calls for search function from form method and then send back result to view
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public ActionResult NameSearch(string query)
         {
-
-
             var SearchItem = db.NameSearcha(query);
-
             return View(SearchItem);
-
         }
 
     }

@@ -15,9 +15,9 @@ namespace Ass5_MVC.DataAccess
         {
         }
 
-        internal object Entry(object stockItem)
-        {
-            throw new NotImplementedException();
-        }
+        //internal object Entry(object stockItem)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
